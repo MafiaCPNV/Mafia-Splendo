@@ -76,6 +76,7 @@ namespace Splendor
             string sql = "CREATE TABLE player (id INT PRIMARY KEY, pseudo VARCHAR(20))";
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
+            
 
             sql = "insert into player (id, pseudo) values (0, 'Fred')";
             command = new SQLiteCommand(sql, m_dbConnection);
@@ -112,7 +113,9 @@ namespace Splendor
         /// </summary>
         private void CreateInsertRessources()
         {
-            //TO DO
+            string sql = "CREATE TABLE Ressource (IdRessource INT PRIMARY KEY)";
+            SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
+            command.ExecuteNonQuery();
         }
 
         /// <summary>
