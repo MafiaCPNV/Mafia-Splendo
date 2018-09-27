@@ -445,6 +445,7 @@
             this.lblChoiceRubis.Size = new System.Drawing.Size(57, 13);
             this.lblChoiceRubis.TabIndex = 33;
             this.lblChoiceRubis.Text = "choix rubis";
+            this.lblChoiceRubis.Click += new System.EventHandler(this.lblChoiceRubis_Click);
             // 
             // lblChoiceSaphir
             // 
