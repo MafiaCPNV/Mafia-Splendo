@@ -139,15 +139,16 @@ namespace Splendor
 
             if (lblRubisCoin.Text == "0" || nbRubis == 2)
                 {
-                lblRubisCoin.Enabled = false;
-                lblSaphirCoin.Enabled = false;
-                lblOnyxCoin.Enabled = false;
-                lblEmeraudeCoin.Enabled = false;
-                lblDiamandCoin.Enabled = false;
-            }
+                    lblRubisCoin.Enabled = false;
+                    lblSaphirCoin.Enabled = false;
+                    lblOnyxCoin.Enabled = false;
+                    lblEmeraudeCoin.Enabled = false;
+                    lblDiamandCoin.Enabled = false;
+
+                }
+
             else if (CoinClick == 0)
                 {
-
                     lblRubisCoin.Enabled = true;
                     lblSaphirCoin.Enabled = true;
                     lblOnyxCoin.Enabled = true;
@@ -156,20 +157,35 @@ namespace Splendor
                     nbRubis++;
 
                 }
-            if (lblSaphirCoin.Text == "0" || nbSaphir == 2)
-                {
-                    lblRubisCoin.Enabled = false;
-                    lblSaphirCoin.Enabled = false;
-                    lblOnyxCoin.Enabled = false;
-                    lblEmeraudeCoin.Enabled = false;
-                    lblDiamandCoin.Enabled = false;
-                }
 
-            else if (CoinClick == 1)
-            {
 
-                    nbSaphir++;
-                }
+             if (CoinClick == 1)
+                 {
+                        lblRubisCoin.Enabled = true;
+                        lblSaphirCoin.Enabled = true;
+                        lblOnyxCoin.Enabled = true;
+                        lblEmeraudeCoin.Enabled = true;
+                        lblDiamandCoin.Enabled = true;
+                        nbSaphir++;
+
+                    if (lblSaphirCoin.Text == "0" || nbSaphir == 2)
+                    {
+                            if (nbSaphir == 1 && (nbRubis == 1 || nbOnyx == 1 || nbEmeraude == 1 || nbDiamand == 1))
+                                {
+                                    lblSaphirCoin.Enabled = false;
+                                    nbSaphir--;
+                                }
+                            else
+                                {
+                                    nbSaphir--;
+                                    lblRubisCoin.Enabled = false;
+                                    lblSaphirCoin.Enabled = false;
+                                    lblOnyxCoin.Enabled = false;
+                                    lblEmeraudeCoin.Enabled = false;
+                                    lblDiamandCoin.Enabled = false;
+                                }
+                    }
+                 }
             
 
             if (lblOnyxCoin.Text == "0" || nbOnyx == 2)
@@ -178,7 +194,7 @@ namespace Splendor
                 }
                 
             else if (CoinClick == 2)
-            {
+                {
                     lblRubisCoin.Enabled = true;
                     lblSaphirCoin.Enabled = true;
                     lblOnyxCoin.Enabled = true;
@@ -190,14 +206,14 @@ namespace Splendor
 
             if (lblEmeraudeCoin.Text == "0" || nbEmeraude == 2)
                 {
-                lblRubisCoin.Enabled = false;
-                lblSaphirCoin.Enabled = false;
-                lblOnyxCoin.Enabled = false;
-                lblEmeraudeCoin.Enabled = false;
-                lblDiamandCoin.Enabled = false;
-            }
-                else if (CoinClick == 3)
-            {
+                    lblRubisCoin.Enabled = false;
+                    lblSaphirCoin.Enabled = false;
+                    lblOnyxCoin.Enabled = false;
+                    lblEmeraudeCoin.Enabled = false;
+                    lblDiamandCoin.Enabled = false;
+                }
+            else if (CoinClick == 3)
+                {
                     lblRubisCoin.Enabled = true;
                     lblSaphirCoin.Enabled = true;
                     lblOnyxCoin.Enabled = true;
@@ -208,14 +224,14 @@ namespace Splendor
             
             if (lblDiamandCoin.Text == "0" || nbDiamand == 2)
                 {
-                lblRubisCoin.Enabled = false;
-                lblSaphirCoin.Enabled = false;
-                lblOnyxCoin.Enabled = false;
-                lblEmeraudeCoin.Enabled = false;
-                lblDiamandCoin.Enabled = false;
-            }
+                    lblRubisCoin.Enabled = false;
+                    lblSaphirCoin.Enabled = false;
+                    lblOnyxCoin.Enabled = false;
+                    lblEmeraudeCoin.Enabled = false;
+                    lblDiamandCoin.Enabled = false;
+                }
                 else if (CoinClick == 4)
-            {
+                {
                     lblRubisCoin.Enabled = true;
                     lblSaphirCoin.Enabled = true;
                     lblOnyxCoin.Enabled = true;
