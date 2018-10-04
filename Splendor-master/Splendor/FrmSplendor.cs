@@ -188,10 +188,10 @@ namespace Splendor
                  }
             
 
-            if (lblOnyxCoin.Text == "0" || nbOnyx == 2)
-                {
-                    lblOnyxCoin.Enabled = false;
-                }
+                    if (lblOnyxCoin.Text == "0" || nbOnyx == 2)
+                        {
+                            lblOnyxCoin.Enabled = false;
+                        }
                 
             else if (CoinClick == 2)
                 {
