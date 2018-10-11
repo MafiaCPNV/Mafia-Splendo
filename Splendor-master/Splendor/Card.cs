@@ -14,8 +14,9 @@ namespace Splendor
         private Ressources ress;
         private int prestigePt;
         private int level;
+        private int idcard ;
         //tableau : l'index correspond à l'énumération, la valeur à la ressource requise
-        private int[] cout = new int[4];
+        private int[] cout = new int[5];
 
         /// <summary>
         /// the precious stone that the card gives
@@ -76,6 +77,18 @@ namespace Splendor
             set
             {
                 cout = value;
+            }
+        }
+
+        public int Idcard
+        {
+            get
+            {
+                return idcard;
+            }
+            set
+            {
+                idcard = value;
             }
         }
 
