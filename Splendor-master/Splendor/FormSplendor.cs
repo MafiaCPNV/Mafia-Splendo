@@ -67,31 +67,7 @@ namespace Splendor
 
             conn = new ConnectionDB();
 
-            //load cards from the database
-            //they are not hard coded any more
-            //TO DO
-
-            /*
-            Card card11 = new Card();
-            card11.Level = 1;
-            card11.PrestigePt = 1;
-            card11.Cout = new int[] { 1, 0, 2, 0, 2 };
-            card11.Ress = Ressources.Rubis;
-
-            Card card12 = new Card();
-            card12.Level = 1;
-            card12.PrestigePt = 0;
-            card12.Cout = new int[] { 0, 1, 2, 1, 0 };
-            card12.Ress = Ressources.Saphir;
-            
-
-
-            txtLevel11.Text = card11.ToString();
-            txtLevel12.Text = card12.ToString();
-            */
-
-
-
+           
             //load cards from the database
             Stack<Card> listCardOne = conn.GetListCardAccordingToLevel(1);
             Stack<Card> listCardtow = conn.GetListCardAccordingToLevel(2);
@@ -102,7 +78,7 @@ namespace Splendor
 
             //load cards from the database
             
-            //Level 1
+            //Level 1 cards
             int nbDataInStack = listCardOne.Count;
             int i = 0;
             foreach (Control ctrl in flwCardLevel1.Controls)
@@ -115,7 +91,7 @@ namespace Splendor
 
             }
 
-            //Levle 2
+            //Levle 2 cards
             nbDataInStack = listCardtow.Count;
             i = 0;
             foreach (Control ctrl in flwCardLevel2.Controls)
@@ -128,7 +104,7 @@ namespace Splendor
 
             }
 
-            //levle 3
+            //Levle 3 cards
             nbDataInStack = listCardtree.Count;
             i = 0;
             foreach (Control ctrl in flwCardLevel3.Controls)
@@ -141,7 +117,7 @@ namespace Splendor
 
             }
 
-            // Noble
+            // Noble cards
             nbDataInStack = listCardfour.Count;
             i = 0;
             foreach (Control ctrl in flwCardNoble.Controls)
@@ -170,15 +146,41 @@ namespace Splendor
             cmdNextPlayer.Visible = false;
 
             //we wire the click on all cards to the same event
-            //TO DO for all cards
+            
+            //Level 1 cards
             txtLevel11.Click += ClickOnCard;
+            txtLevel12.Click += ClickOnCard;
+            txtLevel13.Click += ClickOnCard;
+            txtLevel14.Click += ClickOnCard;
+
+            //level 2 cards
+            txtLevel21.Click += ClickOnCard;
+            txtLevel22.Click += ClickOnCard;
+            txtLevel23.Click += ClickOnCard;
+            txtLevel24.Click += ClickOnCard;
+
+            //level 3 cards
+            txtLevel31.Click += ClickOnCard;
+            txtLevel32.Click += ClickOnCard;
+            txtLevel33.Click += ClickOnCard;
+            txtLevel34.Click += ClickOnCard;
+
+            //Noble cards
+            txtNoble1.Click += ClickOnCard;
+            txtNoble2.Click += ClickOnCard;
+            txtNoble3.Click += ClickOnCard;
+            txtNoble4.Click += ClickOnCard;
         }
 
         private void ClickOnCard(object sender, EventArgs e)
         {
             //We get the value on the card and we split it to get all the values we need (number of prestige points and ressource)
             //Enable the button "Validate"
-            //TO DO
+            
+            TextBox txtBox = sender as TextBox;
+            
+            //get the text displayed in the textbox that has been clicked
+            MessageBox.Show(txtBox.Text);
         }
 
         /// <summary>
@@ -316,6 +318,17 @@ namespace Splendor
 
         }
 
+        //reduce de number of the coin by 1
+        public string Sustlblrocks(string lblrock)
+        {
+            int Valrock = Convert.ToInt16(lblrock);
+
+            Valrock -= 1;
+
+            return Convert.ToString(Valrock);
+
+        }
+
         /// <summary>
         /// load data about the current player
         /// </summary>
@@ -376,6 +389,9 @@ namespace Splendor
                 CoinClick = 0;
                 testCoin();
 
+                
+                lblRubisCoin.Text = Sustlblrocks(lblRubisCoin.Text);
+
                
                 lblChoiceRubis.Text = nbRubis + "\r\n";
             }
@@ -395,6 +411,8 @@ namespace Splendor
                 lblChoiceSaphir.Enabled = true;
                 CoinClick = 1;
                 testCoin();
+
+                lblSaphirCoin.Text = Sustlblrocks(lblSaphirCoin.Text);
 
                 lblChoiceSaphir.Text = nbSaphir + "\r\n";
             }
@@ -418,6 +436,8 @@ namespace Splendor
                 CoinClick = 2;
                 testCoin();
 
+                lblOnyxCoin.Text = Sustlblrocks(lblOnyxCoin.Text);
+
                 lblChoiceOnyx.Text = nbOnyx + "\r\n";
 
 
@@ -438,6 +458,8 @@ namespace Splendor
                 lblChoiceEmeraude.Enabled = true;
                 CoinClick = 3;
                 testCoin();
+
+                lblEmeraudeCoin.Text = Sustlblrocks(lblEmeraudeCoin.Text);
 
                 lblChoiceEmeraude.Text = nbEmeraude + "\r\n";
 
@@ -460,7 +482,9 @@ namespace Splendor
                 lblChoiceDiamand.Enabled = true;
                 CoinClick = 4;
                 testCoin();
-               
+
+                lblDiamandCoin.Text = Sustlblrocks(lblDiamandCoin.Text);
+
                 lblChoiceDiamand.Text = nbDiamand + "\r\n";
 
 
