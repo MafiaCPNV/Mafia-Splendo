@@ -41,6 +41,9 @@ namespace Splendor
         private bool enableClicLabel;
         //connection to the database
         private ConnectionDB conn;
+        //New player
+        private Player player = new Player();
+        
 
         /// <summary>
         /// constructor
@@ -202,29 +205,37 @@ namespace Splendor
         public void testCoin()
         {
 
-            if (lblRubisCoin.Text == "0" || nbRubis == 2)
+            if (CoinClick == 0)
+            {
+                lblRubisCoin.Enabled = true;
+                lblSaphirCoin.Enabled = true;
+                lblOnyxCoin.Enabled = true;
+                lblEmeraudeCoin.Enabled = true;
+                lblDiamandCoin.Enabled = true;
+                nbRubis++;
+
+                if (lblRubisCoin.Text == "0" || nbRubis == 2)
                 {
-                    lblRubisCoin.Enabled = false;
-                    lblSaphirCoin.Enabled = false;
-                    lblOnyxCoin.Enabled = false;
-                    lblEmeraudeCoin.Enabled = false;
-                    lblDiamandCoin.Enabled = false;
-
+                    if (nbRubis == 1 && (nbSaphir == 1 || nbOnyx == 1 || nbEmeraude == 1 || nbDiamand == 1))
+                    {
+                        lblRubisCoin.Enabled = false;
+                        nbRubis--;
+                    }
+                    else
+                    {
+                        nbRubis--;
+                        lblRubisCoin.Enabled = false;
+                        lblSaphirCoin.Enabled = false;
+                        lblOnyxCoin.Enabled = false;
+                        lblEmeraudeCoin.Enabled = false;
+                        lblDiamandCoin.Enabled = false;
+                    }
                 }
-
-            else if (CoinClick == 0)
-                {
-                    lblRubisCoin.Enabled = true;
-                    lblSaphirCoin.Enabled = true;
-                    lblOnyxCoin.Enabled = true;
-                    lblEmeraudeCoin.Enabled = true;
-                    lblDiamandCoin.Enabled = true;
-                    nbRubis++;
-
-                }
+            }
 
 
-             if (CoinClick == 1)
+
+            if (CoinClick == 1)
                  {
                         lblRubisCoin.Enabled = true;
                         lblSaphirCoin.Enabled = true;
@@ -251,59 +262,90 @@ namespace Splendor
                                 }
                     }
                  }
-            
 
-                    if (lblOnyxCoin.Text == "0" || nbOnyx == 2)
-                        {
-                            lblOnyxCoin.Enabled = false;
-                        }
-                
-            else if (CoinClick == 2)
-                {
-                    lblRubisCoin.Enabled = true;
-                    lblSaphirCoin.Enabled = true;
-                    lblOnyxCoin.Enabled = true;
-                    lblEmeraudeCoin.Enabled = true;
-                    lblDiamandCoin.Enabled = true;
-                    nbOnyx++;
-                }
-            
 
-            if (lblEmeraudeCoin.Text == "0" || nbEmeraude == 2)
+            if (CoinClick == 2)
+            {
+                lblRubisCoin.Enabled = true;
+                lblSaphirCoin.Enabled = true;
+                lblOnyxCoin.Enabled = true;
+                lblEmeraudeCoin.Enabled = true;
+                lblDiamandCoin.Enabled = true;
+                nbOnyx++;
+
+                if (lblOnyxCoin.Text == "0" || nbOnyx == 2)
                 {
-                    lblRubisCoin.Enabled = false;
-                    lblSaphirCoin.Enabled = false;
-                    lblOnyxCoin.Enabled = false;
-                    lblEmeraudeCoin.Enabled = false;
-                    lblDiamandCoin.Enabled = false;
+                    if (nbOnyx == 1 && (nbSaphir == 1 || nbRubis == 1 || nbEmeraude == 1 || nbDiamand == 1))
+                    {
+                        lblOnyxCoin.Enabled = false;
+                        nbOnyx--;
+                    }
+                    else
+                    {
+                        nbOnyx--;
+                        lblRubisCoin.Enabled = false;
+                        lblSaphirCoin.Enabled = false;
+                        lblOnyxCoin.Enabled = false;
+                        lblEmeraudeCoin.Enabled = false;
+                        lblDiamandCoin.Enabled = false;
+                    }
                 }
-            else if (CoinClick == 3)
+            }
+
+            if (CoinClick == 3)
+            {
+                lblRubisCoin.Enabled = true;
+                lblSaphirCoin.Enabled = true;
+                lblOnyxCoin.Enabled = true;
+                lblEmeraudeCoin.Enabled = true;
+                lblDiamandCoin.Enabled = true;
+                nbEmeraude++;
+
+                if (lblEmeraudeCoin.Text == "0" || nbOnyx == 2)
                 {
-                    lblRubisCoin.Enabled = true;
-                    lblSaphirCoin.Enabled = true;
-                    lblOnyxCoin.Enabled = true;
-                    lblEmeraudeCoin.Enabled = true;
-                    lblDiamandCoin.Enabled = true;
-                    nbEmeraude++;
+                    if ( nbEmeraude== 1 && (nbSaphir == 1 || nbRubis == 1 || nbOnyx == 1 || nbDiamand == 1))
+                    {
+                        lblEmeraudeCoin.Enabled = false;
+                        nbEmeraude--;
+                    }
+                    else
+                    {
+                        nbEmeraude--;
+                        lblRubisCoin.Enabled = false;
+                        lblSaphirCoin.Enabled = false;
+                        lblOnyxCoin.Enabled = false;
+                        lblEmeraudeCoin.Enabled = false;
+                        lblDiamandCoin.Enabled = false;
+                    }
                 }
-            
-            if (lblDiamandCoin.Text == "0" || nbDiamand == 2)
+            }
+            if (CoinClick == 4)
+            {
+                lblRubisCoin.Enabled = true;
+                lblSaphirCoin.Enabled = true;
+                lblOnyxCoin.Enabled = true;
+                lblEmeraudeCoin.Enabled = true;
+                lblDiamandCoin.Enabled = true;
+                nbDiamand++;
+
+                if (lblDiamandCoin.Text == "0" || nbOnyx == 2)
                 {
-                    lblRubisCoin.Enabled = false;
-                    lblSaphirCoin.Enabled = false;
-                    lblOnyxCoin.Enabled = false;
-                    lblEmeraudeCoin.Enabled = false;
-                    lblDiamandCoin.Enabled = false;
+                    if (nbDiamand == 1 && (nbSaphir == 1 || nbRubis == 1 || nbOnyx == 1 || nbEmeraude == 1))
+                    {
+                        lblDiamandCoin.Enabled = false;
+                        nbDiamand--;
+                    }
+                    else
+                    {
+                        nbDiamand--;
+                        lblRubisCoin.Enabled = false;
+                        lblSaphirCoin.Enabled = false;
+                        lblOnyxCoin.Enabled = false;
+                        lblEmeraudeCoin.Enabled = false;
+                        lblDiamandCoin.Enabled = false;
+                    }
                 }
-                else if (CoinClick == 4)
-                {
-                    lblRubisCoin.Enabled = true;
-                    lblSaphirCoin.Enabled = true;
-                    lblOnyxCoin.Enabled = true;
-                    lblEmeraudeCoin.Enabled = true;
-                    lblDiamandCoin.Enabled = true;
-                    nbDiamand++;
-                }
+            }
 
 
             if (nbRubis +  nbSaphir + nbOnyx + nbEmeraude + nbDiamand >= 3)
@@ -355,11 +397,11 @@ namespace Splendor
             nbSaphir = 0;
             nbEmeraude = 0;
 
-            Player player = new Player();
+            
             player.Name = name;
             player.Id = id;
-            player.Ressources = new int[] { 2, 0, 1, 1, 1 };
-            player.Coins = new int[] { 0, 1, 0, 1, 1 };
+            player.Ressources = new int[] { 0, 0, 0, 0, 0 };
+            player.Coins = new int[] { 0, 0, 0, 0, 0 };
 
             lblPlayerDiamandCoin.Text = player.Coins[0].ToString();
             lblPlayerOnyxCoin.Text = player.Coins[1].ToString();
@@ -498,10 +540,22 @@ namespace Splendor
         /// <param name="e"></param>
         private void cmdValidateChoice_Click(object sender, EventArgs e)
         {
-            cmdNextPlayer.Visible = true;
-            //TO DO Check if card or coins are selected, impossible to do both at the same time
-            
-            cmdNextPlayer.Enabled = true;
+
+            player.Coins[0] += nbRubis;
+            player.Coins[1] += nbEmeraude;
+            player.Coins[2] += nbOnyx;
+            player.Coins[3] += nbSaphir;
+            player.Coins[4] += nbDiamand;
+
+
+            lblPlayerDiamandCoin.Text = player.Coins[4].ToString();
+            lblPlayerOnyxCoin.Text = player.Coins[2].ToString();
+            lblPlayerRubisCoin.Text = player.Coins[0].ToString();
+            lblPlayerSaphirCoin.Text = player.Coins[3].ToString();
+            lblPlayerEmeraudeCoin.Text = player.Coins[1].ToString();
+
+
+
         }
 
         /// <summary>
@@ -532,7 +586,7 @@ namespace Splendor
         {
             if (nbRubis == 0)
             {
-                lblChoiceRubis.Enabled = false;
+                lblChoiceRubis.Visible = false;
             }
             else
             {
@@ -543,7 +597,93 @@ namespace Splendor
                 lblEmeraudeCoin.Enabled = true;
                 lblDiamandCoin.Enabled = true;
                 nbRubis--;
+                int value = Int32.Parse(lblRubisCoin.Text);
+                lblRubisCoin.Text = (value + 1).ToString(); 
                 lblChoiceRubis.Text = nbRubis + "\r\n";
+            }
+        }
+
+        private void lblChoiceSaphir_Click(object sender, EventArgs e)
+        {
+            if (nbSaphir == 0)
+            {
+                lblChoiceSaphir.Visible = false;
+            }
+            else
+            {
+                lblChoiceSaphir.Enabled = true;
+                lblRubisCoin.Enabled = true;
+                lblSaphirCoin.Enabled = true;
+                lblOnyxCoin.Enabled = true;
+                lblEmeraudeCoin.Enabled = true;
+                lblDiamandCoin.Enabled = true;
+                nbSaphir--;
+                int value = Int32.Parse(lblSaphirCoin.Text);
+                lblSaphirCoin.Text = (value + 1).ToString();
+                lblChoiceSaphir.Text = nbSaphir + "\r\n";
+            }
+        }
+
+        private void lblChoiceOnyx_Click(object sender, EventArgs e)
+        {
+            if (nbOnyx == 0)
+            {
+                lblChoiceOnyx.Visible = false;
+            }
+            else
+            {
+                lblChoiceOnyx.Enabled = true;
+                lblRubisCoin.Enabled = true;
+                lblSaphirCoin.Enabled = true;
+                lblOnyxCoin.Enabled = true;
+                lblEmeraudeCoin.Enabled = true;
+                lblDiamandCoin.Enabled = true;
+                nbOnyx--;
+                int value = Int32.Parse(lblOnyxCoin.Text);
+                lblOnyxCoin.Text = (value + 1).ToString();
+                lblChoiceOnyx.Text = nbOnyx + "\r\n";
+            }
+        }
+
+        private void lblChoiceEmeraude_Click(object sender, EventArgs e)
+        {
+            if (nbEmeraude == 0)
+            {
+                lblChoiceEmeraude.Visible = false;
+            }
+            else
+            {
+                lblChoiceEmeraude.Enabled = true;
+                lblRubisCoin.Enabled = true;
+                lblSaphirCoin.Enabled = true;
+                lblOnyxCoin.Enabled = true;
+                lblEmeraudeCoin.Enabled = true;
+                lblDiamandCoin.Enabled = true;
+                nbEmeraude--;
+                int value = Int32.Parse(lblEmeraudeCoin.Text);
+                lblEmeraudeCoin.Text = (value + 1).ToString();
+                lblChoiceEmeraude.Text = nbEmeraude + "\r\n";
+            }
+        }
+
+        private void lblChoiceDiamand_Click(object sender, EventArgs e)
+        {
+            if (nbDiamand == 0)
+            {
+                lblChoiceDiamand.Visible = false;
+            }
+            else
+            {
+                lblChoiceDiamand.Enabled = true;
+                lblRubisCoin.Enabled = true;
+                lblSaphirCoin.Enabled = true;
+                lblOnyxCoin.Enabled = true;
+                lblEmeraudeCoin.Enabled = true;
+                lblDiamandCoin.Enabled = true;
+                nbDiamand--;
+                int value = Int32.Parse(lblDiamandCoin.Text);
+                lblDiamandCoin.Text = (value + 1).ToString();
+                lblChoiceDiamand.Text = nbDiamand + "\r\n";
             }
         }
     }
