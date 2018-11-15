@@ -105,6 +105,29 @@ namespace Splendor
 
         }
 
+        private void CreatNbCoin()
+        {
+
+            string sql = "CREATE TABLE NbCoin (idNbCoin INT PRIMARY KEY AUTOINCREMENT, INT fkPlayer, INT fkRessource, INT NbCoin)";
+            SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
+            command.ExecuteNonQuery();
+
+        }
+
+        private void GetCoins(int player, int Res)
+        {
+
+            string sql = "select NbCoin from NbCoin where fkPlayer = " + player +" AND fkRessource = " +  Res;
+            SQLiteCommand commande = new SQLiteCommand(sql, m_dbConnection);
+            SQLiteDataReader Costreader = commande.ExecuteReader();
+
+        }
+
+        private void InsertCoinToPlayer(int Idofplayer, int Idressource, int NumberCoin)
+        {
+            ExecQuery("insert into NbCoin (fkPlayer, fkRessource, nbCoin) values (" + Idofplayer + ", " + Idressource + ", " + NumberCoin + ")");
+        }
+
 
         /// <summary>
         /// get the name of the player according to his id

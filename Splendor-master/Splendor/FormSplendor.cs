@@ -35,6 +35,8 @@ namespace Splendor
         private int nbSaphir;
         private int CoinClick;
 
+        private int idplayer;
+
         //id of the player that is playing
         private int currentPlayerId;
         //boolean to enable us to know if the user can click on a coin or a card
@@ -196,9 +198,9 @@ namespace Splendor
             this.Width = 680;
             this.Height = 780;
 
-            int id = 0;
+            idplayer = 0;
            
-            LoadPlayer(id);
+            LoadPlayer(idplayer);
 
         }
 
@@ -442,7 +444,7 @@ namespace Splendor
             {
                 cmdValidateChoice.Visible = true;
                 lblChoiceRubis.Visible = true;
-                //TO DO check if possible to choose a coin, update the number of available coin
+                
                 lblChoiceRubis.Enabled = true;
                 CoinClick = 0;
                 testCoin();
@@ -571,6 +573,23 @@ namespace Splendor
             lblPlayerEmeraudeCoin.Text = player.Coins[1].ToString();
 
 
+            
+
+            nbRubis = 0;
+            nbEmeraude = 0;
+            nbOnyx = 0;
+            nbSaphir = 0;
+            nbDiamand = 0;
+
+            lblChoiceRubis.Text = "0";
+            lblChoiceEmeraude.Text = "0";
+            lblChoiceOnyx.Text = "0";
+            lblChoiceSaphir.Text = "0";
+            lblChoiceDiamand.Text = "0";
+
+
+            cmdNextPlayer.Visible = true;
+
 
         }
 
@@ -591,11 +610,26 @@ namespace Splendor
         /// <param name="e"></param>
         private void cmdNextPlayer_Click(object sender, EventArgs e)
         {
-            //TO DO in release 1.0 : 3 is hard coded (number of players for the game), it shouldn't. 
-            //TO DO Get the id of the player : in release 0.1 there are only 3 players
-            //Reload the data of the player
-            //We are not allowed to click on the next button
-            
+
+            lblRubisCoin.Enabled = true;
+            lblEmeraudeCoin.Enabled = true;
+            lblOnyxCoin.Enabled = true;
+            lblSaphirCoin.Enabled = true;
+            lblDiamandCoin.Enabled = true;
+
+            cmdNextPlayer.Visible = true;
+            cmdValidateChoice.Visible = false;
+
+            idplayer++;
+
+            if (idplayer > 2)
+            {
+                idplayer = 0;
+            }
+
+            LoadPlayer(idplayer);
+
+
         }
 
         private void lblChoiceRubis_Click(object sender, EventArgs e)
