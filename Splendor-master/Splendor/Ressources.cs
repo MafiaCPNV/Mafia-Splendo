@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Splendor
 {
-    //Comment marchent les énumérations? Voir :
-    //https://openclassrooms.com/fr/courses/392266-developpement-c-net/391696-les-enumerations-et-structure
-    //To display the string of the enumeration
-    //https://stackoverflow.com/questions/309333/enum-string-name-from-value
+    /// <summary>
+    /// Enumeration of the ressources
+    /// </summary>
     enum Ressources
     {
         Rubis,

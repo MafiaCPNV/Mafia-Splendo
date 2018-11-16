@@ -80,6 +80,9 @@ namespace Splendor
             }
         }
 
+        /// <summary>
+        /// Return the id of the card
+        /// </summary>
         public int Idcard
         {
             get

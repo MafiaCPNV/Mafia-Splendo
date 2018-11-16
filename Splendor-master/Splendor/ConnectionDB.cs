@@ -27,17 +27,20 @@ namespace Splendor
             m_dbConnection = new SQLiteConnection("Data Source=Splendor.sqlite;Version=3;");
             m_dbConnection.Open();
 
-            //create and insert players
-            CreateInsertPlayer();
-            //Create and insert cards
-            //TO DO
-            CreateInsertCards();
-            //Create and insert ressources
-            //TO DO
-            CreateInsertRessources();
+            CreateInsertPlayer();//creats the table and inserts 3 default player
+            
+            CreateInsertCards();//creat the table and insets all cards form the game
+            
+            CreateInsertRessources();//Creat the table and isert all existing ressources from the game
+
+            CreatNbCoin();//Creat the table for the player coins
+
         }
 
-
+        /// <summary>
+        /// Execute the command that have been given
+        /// </summary>
+        /// <param name="Sql">Command</param>
         public void ExecQuery(string Sql)
         {
             SQLiteCommand command = new SQLiteCommand(Sql, m_dbConnection);
@@ -59,6 +62,7 @@ namespace Splendor
             //Create an object "Stack of Card"
             Stack<Card> listCard = new Stack<Card>();
 
+            //Read data of the table card
             while (reader.Read())
             {
                 Card card = new Card();
@@ -105,27 +109,61 @@ namespace Splendor
 
         }
 
-        private void CreatNbCoin()
+        /// <summary>
+        /// //Set to 0 the ressouces of the player
+        /// </summary>
+        public void CreatNbCoin()
         {
 
-            string sql = "CREATE TABLE NbCoin (idNbCoin INT PRIMARY KEY AUTOINCREMENT, INT fkPlayer, INT fkRessource, INT NbCoin)";
+            
+            string sql = "CREATE TABLE NbCoin (idNbCoin INTEGER PRIMARY KEY AUTOINCREMENT, fkPlayer INT, fkRessource INT, NbCoin INT)";
             SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
             command.ExecuteNonQuery();
 
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    ExecQuery("insert into NbCoin (fkPlayer, fkRessource, nbCoin) values (" + i + ", " + j + " , 0)"); // Insert in the Database
+                }
+            }
+            
+            
         }
 
-        private void GetCoins(int player, int Res)
+        /// <summary>
+        /// Returns the number of coins of the specified resource
+        /// </summary>
+        /// <param name="player">Id of the player</param>
+        /// <param name="Res">Ressource that need to be print</param>
+        /// <returns></returns>
+        public string GetCoins(int player, int Res)
         {
 
-            string sql = "select NbCoin from NbCoin where fkPlayer = " + player +" AND fkRessource = " +  Res;
+            string sql = "select NbCoin from NbCoin WHERE fkPlayer = " + player +" AND fkRessource = " +  Res;  
             SQLiteCommand commande = new SQLiteCommand(sql, m_dbConnection);
             SQLiteDataReader Costreader = commande.ExecuteReader();
 
+            string coin = "";
+
+            while (Costreader.Read())
+            {
+                coin = Costreader["NbCoin"].ToString();
+            }
+
+            return coin;
+
         }
 
-        private void InsertCoinToPlayer(int Idofplayer, int Idressource, int NumberCoin)
+        /// <summary>
+        /// Update the number of coins of the player in the database
+        /// </summary>
+        /// <param name="Idofplayer"></param>
+        /// <param name="Idressource"></param>
+        /// <param name="NumberCoin"></param>
+        public void InsertCoinToPlayer(int Idofplayer, int Idressource, int NumberCoin)
         {
-            ExecQuery("insert into NbCoin (fkPlayer, fkRessource, nbCoin) values (" + Idofplayer + ", " + Idressource + ", " + NumberCoin + ")");
+            ExecQuery("UPDATE NbCoin SET NbCoin = NbCoin + " + NumberCoin + " WHERE fkPlayer = " + Idofplayer + " AND fkRessource = " + Idressource + "");
         }
 
 

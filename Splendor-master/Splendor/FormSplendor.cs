@@ -204,6 +204,10 @@ namespace Splendor
 
         }
 
+
+        /// <summary>
+        /// Test the number of coin that the player can take
+        /// </summary>
         public void testCoin()
         {
 
@@ -397,7 +401,7 @@ namespace Splendor
 
             enableClicLabel = true;
 
-            string name = conn.GetPlayerName(currentPlayerId);
+            string name = conn.GetPlayerName(id);
 
             //no coins or card selected yet, labels are empty
             lblChoiceDiamand.Text = "";
@@ -415,18 +419,16 @@ namespace Splendor
             nbSaphir = 0;
             nbEmeraude = 0;
 
-            
             player.Name = name;
             player.Id = id;
             player.Ressources = new int[] { 0, 0, 0, 0, 0 };
             player.Coins = new int[] { 0, 0, 0, 0, 0 };
 
-            lblPlayerDiamandCoin.Text = player.Coins[0].ToString();
-            lblPlayerOnyxCoin.Text = player.Coins[1].ToString();
-            lblPlayerRubisCoin.Text = player.Coins[2].ToString();
-            lblPlayerSaphirCoin.Text = player.Coins[3].ToString();
-            lblPlayerEmeraudeCoin.Text = player.Coins[4].ToString();
-            currentPlayerId = id;
+            lblPlayerDiamandCoin.Text = conn.GetCoins(idplayer, 4);
+            lblPlayerOnyxCoin.Text = conn.GetCoins(idplayer, 2);
+            lblPlayerRubisCoin.Text = conn.GetCoins(idplayer, 0);
+            lblPlayerSaphirCoin.Text = conn.GetCoins(idplayer, 3);
+            lblPlayerEmeraudeCoin.Text = conn.GetCoins(idplayer, 1);
 
             lblPlayer.Text = "Jeu de " + name;
 
@@ -559,22 +561,29 @@ namespace Splendor
         private void cmdValidateChoice_Click(object sender, EventArgs e)
         {
 
+            //Number of coin that the player takes
             player.Coins[0] += nbRubis;
             player.Coins[1] += nbEmeraude;
             player.Coins[2] += nbOnyx;
             player.Coins[3] += nbSaphir;
             player.Coins[4] += nbDiamand;
 
+            //Save the data from the player
+            for (int i = 0; i < player.Coins.Count(); i++)
+            {
 
-            lblPlayerDiamandCoin.Text = player.Coins[4].ToString();
-            lblPlayerOnyxCoin.Text = player.Coins[2].ToString();
-            lblPlayerRubisCoin.Text = player.Coins[0].ToString();
-            lblPlayerSaphirCoin.Text = player.Coins[3].ToString();
-            lblPlayerEmeraudeCoin.Text = player.Coins[1].ToString();
+                conn.InsertCoinToPlayer(idplayer, i, player.Coins[i]);
 
+            }
 
-            
+            //Show how many coins he has taken
+            lblPlayerDiamandCoin.Text = conn.GetCoins(idplayer, 4);
+            lblPlayerOnyxCoin.Text = conn.GetCoins(idplayer, 2);
+            lblPlayerRubisCoin.Text = conn.GetCoins(idplayer, 0);
+            lblPlayerSaphirCoin.Text = conn.GetCoins(idplayer, 3);
+            lblPlayerEmeraudeCoin.Text = conn.GetCoins(idplayer, 1);
 
+            //put to 0 the number of coin that the player has in the round
             nbRubis = 0;
             nbEmeraude = 0;
             nbOnyx = 0;
@@ -587,8 +596,9 @@ namespace Splendor
             lblChoiceSaphir.Text = "0";
             lblChoiceDiamand.Text = "0";
 
-
+            //Shows the next player buttun and disable the validation
             cmdNextPlayer.Visible = true;
+            cmdValidateChoice.Enabled = false;
 
 
         }
@@ -610,16 +620,19 @@ namespace Splendor
         /// <param name="e"></param>
         private void cmdNextPlayer_Click(object sender, EventArgs e)
         {
-
+            
+            //Enable the possibility to get coins
             lblRubisCoin.Enabled = true;
             lblEmeraudeCoin.Enabled = true;
             lblOnyxCoin.Enabled = true;
             lblSaphirCoin.Enabled = true;
             lblDiamandCoin.Enabled = true;
 
+            
             cmdNextPlayer.Visible = true;
             cmdValidateChoice.Visible = false;
 
+            //Verifie witch player is playing
             idplayer++;
 
             if (idplayer > 2)
@@ -629,13 +642,20 @@ namespace Splendor
 
             LoadPlayer(idplayer);
 
+            cmdNextPlayer.Visible = false;
+            cmdValidateChoice.Enabled = true;
 
         }
 
+        /// <summary>
+        /// Substraction of rubis coin choice
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblChoiceRubis_Click(object sender, EventArgs e)
         {
 
-
+                //Enable the possibility to get coins
                 lblChoiceRubis.Enabled = true;
                 lblRubisCoin.Enabled = true;
                 lblSaphirCoin.Enabled = true;
@@ -643,18 +663,25 @@ namespace Splendor
                 lblEmeraudeCoin.Enabled = true;
                 lblDiamandCoin.Enabled = true;
                 nbRubis--;
+
                  if (nbRubis == 0)
                  {
                     lblChoiceRubis.Visible = false;
                  }
+
             int value = Int32.Parse(lblRubisCoin.Text);
                 lblRubisCoin.Text = (value + 1).ToString(); 
                 lblChoiceRubis.Text = nbRubis + "\r\n";
         }
-
+        /// <summary>
+        /// Substraction of Saphir coin choice
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblChoiceSaphir_Click(object sender, EventArgs e)
         {
 
+                //Enable the possibility to get coins
                 lblChoiceSaphir.Enabled = true;
                 lblRubisCoin.Enabled = true;
                 lblSaphirCoin.Enabled = true;
@@ -662,19 +689,26 @@ namespace Splendor
                 lblEmeraudeCoin.Enabled = true;
                 lblDiamandCoin.Enabled = true;
                 nbSaphir--;
+
                 if (nbSaphir == 0)
                 {
                     lblChoiceSaphir.Visible = false;
                 }
+
                 int value = Int32.Parse(lblSaphirCoin.Text);
                 lblSaphirCoin.Text = (value + 1).ToString();
                 lblChoiceSaphir.Text = nbSaphir + "\r\n";
             
         }
-
+        /// <summary>
+        /// Substraction of Onyx coin choice
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblChoiceOnyx_Click(object sender, EventArgs e)
         {
 
+                //Enable the possibility to get coins
                 lblChoiceOnyx.Enabled = true;
                 lblRubisCoin.Enabled = true;
                 lblSaphirCoin.Enabled = true;
@@ -682,19 +716,25 @@ namespace Splendor
                 lblEmeraudeCoin.Enabled = true;
                 lblDiamandCoin.Enabled = true;
                 nbOnyx--;
+
                 if (nbOnyx == 0)
                 {
                     lblChoiceOnyx.Visible = false;
                 }
+
                 int value = Int32.Parse(lblOnyxCoin.Text);
                 lblOnyxCoin.Text = (value + 1).ToString();
                 lblChoiceOnyx.Text = nbOnyx + "\r\n";
             
         }
-
+        /// <summary>
+        /// Substraction of Emeraude coin choice
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblChoiceEmeraude_Click(object sender, EventArgs e)
         {
-
+                //Enable the possibility to get coins
                 lblChoiceEmeraude.Enabled = true;
                 lblRubisCoin.Enabled = true;
                 lblSaphirCoin.Enabled = true;
@@ -702,19 +742,26 @@ namespace Splendor
                 lblEmeraudeCoin.Enabled = true;
                 lblDiamandCoin.Enabled = true;
                 nbEmeraude--;
+
                 if (nbEmeraude == 0)
                 {
                     lblChoiceEmeraude.Visible = false;
                 }
+
                 int value = Int32.Parse(lblEmeraudeCoin.Text);
                 lblEmeraudeCoin.Text = (value + 1).ToString();
                 lblChoiceEmeraude.Text = nbEmeraude + "\r\n";
             
         }
-
+        /// <summary>
+        /// Substraction of Diamond coin choice
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblChoiceDiamand_Click(object sender, EventArgs e)
         {
 
+                //Enable the possibility to get coins
                 lblChoiceDiamand.Enabled = true;
                 lblRubisCoin.Enabled = true;
                 lblSaphirCoin.Enabled = true;
@@ -722,10 +769,12 @@ namespace Splendor
                 lblEmeraudeCoin.Enabled = true;
                 lblDiamandCoin.Enabled = true;
                 nbDiamand--;
+
                 if (nbDiamand == 0)
                 {
                     lblChoiceDiamand.Visible = false;
                 }
+
                 int value = Int32.Parse(lblDiamandCoin.Text);
                 lblDiamandCoin.Text = (value + 1).ToString();
                 lblChoiceDiamand.Text = nbDiamand + "\r\n";
